@@ -10,6 +10,7 @@ use App\Reader\RemainsReader;
 use App\Writer\CsvWriter;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Route;
 
@@ -38,6 +39,10 @@ class HomepageController extends Controller
      * @var InRangeStrategy
      */
     private $inRangeStrategy;
+    /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
 
     /**
      * HomepageController constructor.
@@ -51,14 +56,33 @@ class HomepageController extends Controller
         RemainsReader $remainsReader,
         HotlineReader $hotlineReader,
         InRangeStrategy $inRangeStrategy,
-        CsvWriter $csvWriter
+        CsvWriter $csvWriter,
+        FormFactoryInterface $formFactory
     ) {
         $this->remainsReader = $remainsReader;
         $this->hotlineReader = $hotlineReader;
 
         $this->inRangeStrategy = $inRangeStrategy;
         $this->csvWriter = $csvWriter;
+        $this->formFactory = $formFactory;
     }
+
+//    /**
+//     * @Symfony\Component\Routing\Annotation\Route(
+//     *     name="homepage",
+//     *     path="/"
+//     * )
+//     * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Method({"GET"})
+//     *
+//     * @return Response
+//     */
+//    public function indexAction()
+//    {
+//        $form = $this->formFactory->create(RegistrationFormType::class, $data);
+//
+//        $form = $this->get
+//    }
+
 
     /**
      * @Symfony\Component\Routing\Annotation\Route(
@@ -69,12 +93,19 @@ class HomepageController extends Controller
      *
      * @return Response
      */
-    public function indexAction()
+    public function analyzeAction()
     {
         // choose Remains document
         // choose column names for remains document
         $path = __DIR__ . '/../../public/downloads/1remains.csv';
         $remainsArray = $this->remainsReader->readFromFile($path);
+
+//        echo '<pre>';
+//        $list = array_column($remainsArray, 'sku');
+//        sort($list);
+//
+//        print_R($list);
+//        die;
 
         // choose Hotline document
         // choose column names for hotline document
@@ -85,7 +116,7 @@ class HomepageController extends Controller
         $result = [];
 
         foreach($remainsArray as $row) {
-            $sku = $row[AbstractReader::SKU]; // ToDO: change to SKU
+            $sku = $row[AbstractReader::SKU];
             $merged = array_key_exists($sku, $hotlineArray)
                 ? array_merge(
                     [AbstractReader::SELLER_COST => 0, AbstractReader::RETAIL_PRICE => 0],
@@ -110,6 +141,10 @@ class HomepageController extends Controller
         $path = __DIR__ . '/../../public/downloads/3result.xls';
         $this->csvWriter->path($path)->write($result);
 
-        return $this->render('homepage.html.twig', []);
+        $response = new Response();
+        $response->headers->set('Content-Type', 'application/vnd.ms-excel');
+        $response->headers->set('Content-Disposition', 'attachment; filename="3result.xls"');
+        $response->setContent(file_get_contents($path));
+        return $response;
     }
 }

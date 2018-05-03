@@ -39,32 +39,32 @@ class RemainsReader extends AbstractReader
     /**
      * @param Worksheet $worksheet
      * @param int       $rowIndex
+     * @param int       $index
      *
      * @return array
      */
-    protected function readLine(Worksheet $worksheet, int &$rowIndex): array
+    protected function readLine(Worksheet $worksheet, int &$rowIndex, int $index): array
     {
         // reading first line
-        $res = parent::readLine($worksheet, $rowIndex);
-        $res[self::SKU] = null;
+        $res = parent::readLine($worksheet, $rowIndex, $index);
+        $res[self::SKU] = 'sku--' . $rowIndex;
 
         if(array_key_exists(self::SELLER_COST, $res) && array_key_exists(self::QUANTITY, $res)) {
             // every next line with the same key
 
-            $token = serialize([$res[self::SELLER_COST], $res[self::QUANTITY]]);
+            $token = serialize([$res[self::SELLER_COST], $res[self::QUANTITY], $index]);
             while(true) {
                 $rowIndex++;
-                $nextLine = parent::readLine($worksheet, $rowIndex);
+                $nextLine = parent::readLine($worksheet, $rowIndex, $index);
 
-                if(!array_key_exists(self::SELLER_COST, $nextLine) || !array_key_exists(self::QUANTITY, $nextLine)) {
-                    return $res;
-                }
+                $cost = $nextLine[self::SELLER_COST] ?? null;
+                $qty = $nextLine[self::QUANTITY] ?? null;
 
-                $newLineToken = serialize([$nextLine[self::SELLER_COST], $nextLine[self::QUANTITY]]);
+                $newLineToken = serialize([$cost, $qty, $index]);
 
                 if($token !== $newLineToken) {
+                    $res[self::SKU] = 'sku--' . $rowIndex;
                     --$rowIndex;
-                    $res[self::SKU] = null;
                     return $res;
                 }
 

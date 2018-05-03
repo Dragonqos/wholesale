@@ -36,7 +36,7 @@ class HotlineReader extends AbstractReader
     protected function getSchema(): array
     {
         return [
-            self::NAME => 3,
+//            self::NAME => 3,
             self::SKU => 10,
             self::RETAIL_PRICE => 5
         ];
@@ -48,7 +48,7 @@ class HotlineReader extends AbstractReader
     protected function getSchemaType(): array
     {
         return [
-            self::NAME => 'string',
+//            self::NAME => 'string',
             self::SKU => 'int',
             self::RETAIL_PRICE => 'float'
         ];

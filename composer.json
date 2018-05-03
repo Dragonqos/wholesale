@@ -2,7 +2,8 @@
     "type": "Wholesale",
     "license": "proprietary",
     "repositories": [
-        { "type": "vcs", "url": "git@github.com:lukaszwit/LexikCurrencyBundle.git" }
+        { "type": "vcs", "url": "git@github.com:lukaszwit/LexikCurrencyBundle.git" },
+        { "type": "vcs", "url": "git@github.com:next-sentence/SyliusFlowBundle.git" }
     ],
     "require": {
         "php": "^7.1.3",
@@ -27,7 +28,8 @@
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "^4.0",
         "yectep/phpspreadsheet-bundle": "*",
-        "lexik/currency-bundle": "dev-master"
+        "lexik/currency-bundle": "dev-master",
+        "sylius/flow-bundle": "dev-master"
     },
     "require-dev": {
         "symfony/browser-kit": "^4.0",

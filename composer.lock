@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "dab6ef9ee22a8a5b9c353d6b29f220a3",
+    "content-hash": "367ab0627dfb0aaace519e6f34e5b816",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1960,6 +1960,74 @@
                 "mailer"
             ],
             "time": "2018-04-20T06:13:15+00:00"
+        },
+        {
+            "name": "sylius/flow-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/next-sentence/SyliusFlowBundle.git",
+                "reference": "b3a1ec7f5396dfc324601857ff9d09081cc04198"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/next-sentence/SyliusFlowBundle/zipball/b3a1ec7f5396dfc324601857ff9d09081cc04198",
+                "reference": "b3a1ec7f5396dfc324601857ff9d09081cc04198",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0",
+                "symfony/framework-bundle": "^2.8 || ^3.0 || ^4.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^3.0 || ^4.3",
+                "symfony/yaml": "~2.1 || ^3.0 || ^4.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Bundle\\FlowBundle\\": ""
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Sylius\\Bundle\\FlowBundle\\Tests\\": "Tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "homepage": "http://pjedrzejewski.com"
+                },
+                {
+                    "name": "Sylius project",
+                    "homepage": "http://sylius.org"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "http://github.com/Sylius/Sylius/contributors"
+                }
+            ],
+            "description": "Multiple action setups for Symfony2, build your checkouts/installers or whatever needs more than one step to complete.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "checkout",
+                "flow",
+                "installation",
+                "steps"
+            ],
+            "support": {
+                "source": "https://github.com/next-sentence/SyliusFlowBundle/tree/master"
+            },
+            "time": "2018-04-12T09:05:46+00:00"
         },
         {
             "name": "symfony/asset",
@@ -5966,7 +6034,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "symfony/lts": 20,
-        "lexik/currency-bundle": 20
+        "lexik/currency-bundle": 20,
+        "sylius/flow-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
