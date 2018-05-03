@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Service;
+namespace App\Reader;
 
+use App\Service\SkuFinder;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Row;
@@ -9,8 +10,8 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Yectep\PhpSpreadsheetBundle\Factory;
 
 /**
- * Class HotlineReader
- * @package App\Service
+ * Class AbstractReader
+ * @package App\Reader
  */
 abstract class AbstractReader
 {
@@ -18,6 +19,7 @@ abstract class AbstractReader
     const NAME = 'name';
     const RETAIL_PRICE = 'retail_price';
     const SELLER_COST = 'seller_cost';
+    const WHOLESALE_PRICE = 'wholesale_price';
     const QUANTITY = 'quantity';
 
     private $floatRegex = '/[^0-9\.\-]/';
@@ -84,7 +86,7 @@ abstract class AbstractReader
             }
 
             if (!empty($res)) {
-                $result[] = $res;
+                $result[$res[self::NAME]] = $res;
             }
         }
 

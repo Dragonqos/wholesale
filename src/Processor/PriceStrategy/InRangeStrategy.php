@@ -3,24 +3,22 @@
 namespace App\Processor\PriceStrategy;
 
 /**
- * Class ConfigurationStrategy
+ * Class InRangeStrategy
  * @package App\Processor\PriceStrategy
  */
-class ConfigurationStrategy implements PriceStrategyInterface
+class InRangeStrategy implements PriceStrategyInterface
 {
     /**
      * @var array
      */
-    private $configuration;
+    private $configuration = [];
 
     /**
-     * ConfigurationStrategy constructor.
-     *
-     * @param array|null $configuration
+     * InRangeStrategy constructor.
      */
-    public function __construct(?array $configuration)
+    public function __construct()
     {
-        $defaultConfiguration = [
+        $this->configuration = [
             [
                 'operator' => 'lte',
                 'inRange' => [
@@ -58,8 +56,6 @@ class ConfigurationStrategy implements PriceStrategyInterface
                 'wholesaleMaxAmount' => 20
             ]
         ];
-
-        $this->configuration = $configuration || $defaultConfiguration;
     }
 
     /**

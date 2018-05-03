@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Service;
+namespace App\Reader;
 
+use App\Service\SkuFinder;
 use Lexik\Bundle\CurrencyBundle\Currency\Converter;
 use Yectep\PhpSpreadsheetBundle\Factory;
 
 /**
  * Class HotlineReader
- * @package App\Service
+ * @package App\Reader
  */
 class HotlineReader extends AbstractReader
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Service;
+namespace App\Reader;
 
 /**
  * Class RemainsReader
- * @package App\Service
+ * @package App\Reader
  */
 class RemainsReader extends AbstractReader
 {
@@ -14,9 +14,9 @@ class RemainsReader extends AbstractReader
     protected function getSchema(): array
     {
         return [
-            'name' => 1,
-            'seller_cost' => 4,
-            'quantity' => 2
+            self::NAME => 1,
+            self::SELLER_COST => 4,
+            self::QUANTITY => 2
         ];
     }
 
@@ -26,9 +26,9 @@ class RemainsReader extends AbstractReader
     protected function getSchemaType(): array
     {
         return [
-            'name' => 'string',
-            'seller_cost' => 'float',
-            'quantity' => 'int'
+            self::NAME => 'string',
+            self::SELLER_COST => 'float',
+            self::QUANTITY => 'int'
         ];
     }
 }

@@ -36,6 +36,14 @@ services:
 
 
     # App
-    App\Service\RemainsReader: ~
-    App\Service\HotlineReader: ~
+
     App\Service\SkuFinder: ~
+
+    App\Reader\RemainsReader: ~
+    App\Reader\HotlineReader: ~
+
+    App\Writer\CsvWriter: ~
+
+
+    App\Processor\PriceStrategy\PriceStrategyInterface: '@App\Processor\PriceStrategy\InRangeStrategy'
+    App\Processor\PriceStrategy\InRangeStrategy: ~
