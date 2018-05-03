@@ -74,14 +74,21 @@ abstract class AbstractReader
 
         $result = [];
 
+        $rowIndex = 1;
+        $totalRows = iterator_count($worksheet->getRowIterator());
         /**
          * @var Row $row
          */
-        foreach ($worksheet->getRowIterator() as $rowIndex => $row) {
+        while ($rowIndex <= $totalRows) {
             $res = $this->readLine($worksheet, $rowIndex);
-            if (!empty($res)) {
-                $result[$res[self::NAME]] = $res;
+            if (!empty($res) && isset($res[self::NAME])) {
+
+                $sku = $res[self::SKU] ?? '0000'. $rowIndex;
+
+                $result[$sku] = $res;
             }
+
+            ++$rowIndex;
         }
 
         return $result;
@@ -93,7 +100,7 @@ abstract class AbstractReader
      *
      * @return array
      */
-    protected function readLine(Worksheet $worksheet, int $rowIndex): array
+    protected function readLine(Worksheet $worksheet, int &$rowIndex): array
     {
         $res = [];
         foreach ($this->getSchema() as $name => $nameIndex) {
@@ -108,7 +115,7 @@ abstract class AbstractReader
 
     /**
      * @param string $name
-     * @param mixed $val
+     * @param mixed  $val
      *
      * @return mixed|string
      */

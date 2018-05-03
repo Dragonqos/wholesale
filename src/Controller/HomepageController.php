@@ -85,12 +85,12 @@ class HomepageController extends Controller
         $result = [];
 
         foreach($remainsArray as $row) {
-            $name = $row[AbstractReader::NAME]; // ToDO: change to SKU
-            $merged = array_key_exists($name, $hotlineArray)
+            $sku = $row[AbstractReader::SKU]; // ToDO: change to SKU
+            $merged = array_key_exists($sku, $hotlineArray)
                 ? array_merge(
                     [AbstractReader::SELLER_COST => 0, AbstractReader::RETAIL_PRICE => 0],
                     $row,
-                    $hotlineArray[$name]
+                    $hotlineArray[$sku]
                 )
                 : array_merge(
                     [AbstractReader::SELLER_COST => 0, AbstractReader::RETAIL_PRICE => 0],
@@ -98,12 +98,13 @@ class HomepageController extends Controller
                     ['isNew' => 1]
                 );
 
-            $merged[AbstractReader::WHOLESALE_PRICE] = $this->inRangeStrategy->process(
+            $wholesalePrice = $this->inRangeStrategy->process(
                 $merged[AbstractReader::SELLER_COST],
                 $merged[AbstractReader::RETAIL_PRICE]
             );
 
-            $result[$name] = $merged;
+            $merged[AbstractReader::WHOLESALE_PRICE] = round($wholesalePrice);
+            $result[$sku] = $merged;
         }
 
         $path = __DIR__ . '/../../public/downloads/3result.xls';

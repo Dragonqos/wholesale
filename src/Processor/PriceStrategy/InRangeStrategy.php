@@ -45,11 +45,11 @@ class InRangeStrategy implements PriceStrategyInterface
             ],
             [
                 'inRange' => [
-                    15, 1000
+                    15, 10000
                 ],
                 'discount' => 5,
                 'minDiscount' => 2,
-                'maxAmount' => 20
+                'maxAmount' => 15
             ]
         ];
     }
@@ -66,7 +66,6 @@ class InRangeStrategy implements PriceStrategyInterface
 
         # when retail price is less then 50$ - use for Wholesale price Retail price
         if($retailPrice >= 50 && $sellerCost !== $retailPrice) {
-
             foreach ($this->configuration as $settings) {
                 if(null !== ($result = $this->recalculate($settings, $sellerCost, $retailPrice))) {
                     $newSellerPrice = $result;
@@ -94,7 +93,9 @@ class InRangeStrategy implements PriceStrategyInterface
         $range = $settings['inRange'];
         $onePercent = $sellerCost / 100;
         $priceDiff = $retailPrice - $sellerCost;
-        $priceDiffPercents = $priceDiff / $onePercent;
+        $priceDiffPercents = $onePercent === (float) 0
+            ? 0
+            : $priceDiff / $onePercent;
 
         if($range[0] <= $priceDiffPercents && $priceDiffPercents < $range[1]) {
 
