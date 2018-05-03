@@ -3,7 +3,6 @@
 namespace App\Writer;
 
 use App\Reader\AbstractReader;
-use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Writer\Xls;
@@ -29,12 +28,12 @@ class CsvWriter implements WriterInterface
      * @var array
      */
     private $schema = [
-        'A' => AbstractReader::NAME,
-        'B' => AbstractReader::SKU,
-        'C' => AbstractReader::QUANTITY,
+        'A' => AbstractReader::SKU,
+        'B' => AbstractReader::NAME,
+        'C' => AbstractReader::WHOLESALE_PRICE,
         'D' => AbstractReader::SELLER_COST,
         'E' => AbstractReader::RETAIL_PRICE,
-        'F' => AbstractReader::WHOLESALE_PRICE
+        'F' => AbstractReader::QUANTITY
     ];
 
     /**
@@ -70,6 +69,7 @@ class CsvWriter implements WriterInterface
         # Set Headers
         foreach ($this->schema as $colIndex => $name) {
             $spreadsheet->getActiveSheet()->getCell($colIndex.'1')->setValue($name);
+            $spreadsheet->getActiveSheet()->getColumnDimension($colIndex)->setAutoSize(true)->setVisible(true);
         }
 
         $rowIndex = 2;
@@ -83,7 +83,7 @@ class CsvWriter implements WriterInterface
                     ->setValue($row[$name] ?? '');
 
                 # Apply Styles Body
-                if($row['isNew'] ?? 0 === 1 && $colIndex === 'F') {
+                if($row['isNew'] ?? 0 === 1) {
                     $cell->getStyle()->getFill()
                         ->setFillType(Fill::FILL_SOLID)
                         ->getStartColor()
@@ -93,13 +93,6 @@ class CsvWriter implements WriterInterface
 
             ++$rowIndex;
         }
-
-        $spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true)->setVisible(true);
-        $spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true)->setVisible(true);
-        $spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true)->setVisible(true);
-        $spreadsheet->getActiveSheet()->getColumnDimension('D')->setAutoSize(true)->setVisible(true);
-        $spreadsheet->getActiveSheet()->getColumnDimension('E')->setAutoSize(true)->setVisible(true);
-        $spreadsheet->getActiveSheet()->getColumnDimension('F')->setAutoSize(true)->setVisible(true);
 
         /** @var Xls $writer */
         $writer = $this->spreadSheetFactory->createWriter($spreadsheet, 'Xls');

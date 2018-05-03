@@ -78,17 +78,17 @@ class InRangeStrategy implements PriceStrategyInterface
                 if ($range[0] <= $diffInPercents && $diffInPercents < $range[1]) {
 
                     $profit = $this->getPercentOfNumber($retailPrice, $settings['wholesalePercentDiscount']);
-                    $profitMinAmount = $settings['wholesaleMinAmount'] || 0.5;
+                    $profitMinAmount = $settings['wholesaleMinAmount'];
 
                     $profit = max($profit, $profitMinAmount);
 
-                    $profitMaxAmount = $settings['wholesaleMaxAmount'] || 1;
-                    $profit = min($profit, $profitMaxAmount);
+                    $profitMaxAmount = $settings['wholesaleMaxAmount'];
 
-                    # Round half to up
-                    $profit = round($profit);
+                    $profit = $profit >= $profitMaxAmount
+                        ? $profitMaxAmount
+                        : $profit;
 
-                    $newSellerPrice = $retailPrice - $profit;
+                    $newSellerPrice = round($retailPrice - $profit);
                 }
             }
         }
