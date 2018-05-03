@@ -20,40 +20,36 @@ class InRangeStrategy implements PriceStrategyInterface
     {
         $this->configuration = [
             [
-                'operator' => 'lte',
                 'inRange' => [
                     0, 3
                 ],
-                'wholesalePercentDiscount' => 1,
-                'wholesaleMinAmount' => 0.5,
-                'wholesaleMaxAmount' => 10
+                'discount' => 1,
+                'minDiscount' => 0.5,
+                'maxAmount' => 10
             ],
             [
-                'operator' => 'lte',
                 'inRange' => [
                     3, 7
                 ],
-                'wholesalePercentDiscount' => 1,
-                'wholesaleMinAmount' => 2,
-                'wholesaleMaxAmount' => 15,
+                'discount' => 2,
+                'minDiscount' => 2,
+                'maxAmount' => 15
             ],
             [
-                'operator' => 'lte',
                 'inRange' => [
                     7, 15
                 ],
-                'wholesalePercentDiscount' => 3,
-                'wholesaleMinAmount' => 2,
-                'wholesaleMaxAmount' => 15,
+                'discount' => 3,
+                'minDiscount' => 2,
+                'maxAmount' => 15
             ],
             [
-                'operator' => 'lte',
                 'inRange' => [
                     15, 1000
                 ],
-                'wholesalePercentDiscount' => 5,
-                'wholesaleMinAmount' => 2,
-                'wholesaleMaxAmount' => 20
+                'discount' => 5,
+                'minDiscount' => 2,
+                'maxAmount' => 20
             ]
         ];
     }
@@ -68,27 +64,13 @@ class InRangeStrategy implements PriceStrategyInterface
     {
         $newSellerPrice = $retailPrice;
 
-        foreach ($this->configuration as $settings) {
-            # If operator matches
-            if ($sellerCost !== $retailPrice && $this->{$settings['operator']}($sellerCost, $retailPrice)) {
-                $range = $settings['inRange'];
-                $diffInPercents = ($retailPrice - $sellerCost) / ($sellerCost / 100);
+        # when retail price is less then 50$ - use for Wholesale price Retail price
+        if($retailPrice >= 50 && $sellerCost !== $retailPrice) {
 
-                # when diff between amounts is inRange
-                if ($range[0] <= $diffInPercents && $diffInPercents < $range[1]) {
-
-                    $profit = $this->getPercentOfNumber($retailPrice, $settings['wholesalePercentDiscount']);
-                    $profitMinAmount = $settings['wholesaleMinAmount'];
-
-                    $profit = max($profit, $profitMinAmount);
-
-                    $profitMaxAmount = $settings['wholesaleMaxAmount'];
-
-                    $profit = $profit >= $profitMaxAmount
-                        ? $profitMaxAmount
-                        : $profit;
-
-                    $newSellerPrice = round($retailPrice - $profit);
+            foreach ($this->configuration as $settings) {
+                if(null !== ($result = $this->recalculate($settings, $sellerCost, $retailPrice))) {
+                    $newSellerPrice = $result;
+                    break;
                 }
             }
         }
@@ -97,25 +79,73 @@ class InRangeStrategy implements PriceStrategyInterface
     }
 
     /**
+     * @param       $settings
      * @param float $sellerCost
-     * @param       $retailPrice
+     * @param float $retailPrice
      *
-     * @return bool
+     * @return float|null
      */
-    private function eq(float $sellerCost, float $retailPrice): bool
+    private function recalculate($settings, float $sellerCost, float $retailPrice): ?float
     {
-        return $sellerCost === $retailPrice;
-    }
+        if($sellerCost > $retailPrice) {
+            return null;
+        }
 
-    /**
-     * @param float $sellerCost
-     * @param       $retailPrice
-     *
-     * @return bool
-     */
-    private function lte(float $sellerCost, $retailPrice): bool
-    {
-        return $sellerCost <= $retailPrice;
+        $range = $settings['inRange'];
+        $onePercent = $sellerCost / 100;
+        $priceDiff = $retailPrice - $sellerCost;
+        $priceDiffPercents = $priceDiff / $onePercent;
+
+        if($range[0] <= $priceDiffPercents && $priceDiffPercents < $range[1]) {
+
+            # now we can calculate new Wholesale Price
+
+            $margin = $this->getPercentOfNumber($retailPrice, $settings['discount']);
+            $minMargin = $this->getPercentOfNumber($retailPrice, $settings['minDiscount']);
+            $maxMargin = $settings['maxAmount'];
+
+            # total margin should never be greater then $maxMargin;
+
+            $result = $retailPrice - $margin;
+
+            if($margin > $priceDiff) {
+
+                $result = $minMargin >= $priceDiff
+                    ? $retailPrice // if less then min margin
+                    : $sellerCost + $minMargin;
+
+                if ($result === $retailPrice) {
+                    return $result;
+                }
+
+            } else {
+                if($margin > $priceDiff/2) {
+                    $result = $retailPrice - ($priceDiff/2);
+                }
+
+                if($margin < $priceDiff/2) {
+                    $result = $retailPrice - ($margin >= $maxMargin ? $maxMargin : $margin);
+                }
+            }
+
+            if($retailPrice - $result < $minMargin) {
+                $result = $retailPrice - $minMargin;
+            }
+
+            # when more than max amount
+            if($retailPrice - $result > $maxMargin) {
+                $result = $retailPrice - $maxMargin;
+            }
+
+            # when more than retail price
+            if($result > $retailPrice) {
+                $result = $retailPrice;
+            }
+
+            return $result;
+        }
+
+        return null;
     }
 
     /**
@@ -126,7 +156,7 @@ class InRangeStrategy implements PriceStrategyInterface
      */
     private function getPercentOfNumber(float $number, float $percent): float
     {
-        return ($percent / 100) * $number;
+        return ($number / 100) * $percent;
     }
 
 }

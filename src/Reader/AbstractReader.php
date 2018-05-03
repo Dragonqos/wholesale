@@ -74,23 +74,36 @@ abstract class AbstractReader
 
         $result = [];
 
-        // read first line
-        /** @var Row $row */
+        /**
+         * @var Row $row
+         */
         foreach ($worksheet->getRowIterator() as $rowIndex => $row) {
-            $res = [];
-            foreach ($this->getSchema() as $name => $nameIndex) {
-                $col = $worksheet->getCellByColumnAndRow($nameIndex, $rowIndex, false);
-                if (null !== $col) {
-                    $res[$name] = $this->convertValue($name, $col->getFormattedValue());
-                }
-            }
-
+            $res = $this->readLine($worksheet, $rowIndex);
             if (!empty($res)) {
                 $result[$res[self::NAME]] = $res;
             }
         }
 
         return $result;
+    }
+
+    /**
+     * @param Worksheet $worksheet
+     * @param int       $rowIndex
+     *
+     * @return array
+     */
+    protected function readLine(Worksheet $worksheet, int $rowIndex): array
+    {
+        $res = [];
+        foreach ($this->getSchema() as $name => $nameIndex) {
+            $col = $worksheet->getCellByColumnAndRow($nameIndex, $rowIndex, false);
+            if (null !== $col) {
+                $res[$name] = $this->convertValue($name, $col->getFormattedValue());
+            }
+        }
+
+        return $res;
     }
 
     /**

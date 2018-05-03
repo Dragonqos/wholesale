@@ -17,6 +17,9 @@
     "doctrine/common": {
         "version": "v2.8.1"
     },
+    "doctrine/data-fixtures": {
+        "version": "1.3.x-dev"
+    },
     "doctrine/dbal": {
         "version": "v2.7.1"
     },
@@ -71,11 +74,17 @@
     "fig/link-util": {
         "version": "1.0.0"
     },
+    "hamcrest/hamcrest-php": {
+        "version": "1.2.x-dev"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
     "lexik/currency-bundle": {
         "version": "dev-master"
+    },
+    "mockery/mockery": {
+        "version": "0.9.x-dev"
     },
     "monolog/monolog": {
         "version": "1.23.0"
