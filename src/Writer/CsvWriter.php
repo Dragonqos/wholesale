@@ -31,9 +31,9 @@ class CsvWriter implements WriterInterface
         'A' => AbstractReader::SKU,
         'B' => AbstractReader::NAME,
         'C' => AbstractReader::WHOLESALE_PRICE,
-        'D' => AbstractReader::SELLER_COST,
-        'E' => AbstractReader::RETAIL_PRICE,
-        'F' => AbstractReader::QUANTITY
+        'D' => AbstractReader::QUANTITY,
+        'E' => AbstractReader::SELLER_COST,
+        'F' => AbstractReader::RETAIL_PRICE,
     ];
 
     /**
