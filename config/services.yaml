@@ -26,3 +26,16 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Spreadsheet
+    Yectep\PhpSpreadsheetBundle\Factory: '@phpoffice.spreadsheet'
+
+    # Lexik converter
+    Lexik\Bundle\CurrencyBundle\Currency\Converter: '@lexik_currency.converter'
+    Lexik\Bundle\CurrencyBundle\Command\ImportCurrencyCommand: ~
+
+
+    # App
+    App\Service\RemainsReader: ~
+    App\Service\HotlineReader: ~
+    App\Service\SkuFinder: ~

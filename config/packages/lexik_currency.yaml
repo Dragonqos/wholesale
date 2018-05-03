@@ -1,0 +1,9 @@
+lexik_currency:
+    currencies:
+        default: UAH         # [required] the default currency
+        managed: [USD, UAH]  # [required] all currencies used in your app
+    decimal_part:
+        precision:  2                           # number of digits for the decimal part
+        round_mode: up
+    currency_class: Lexik\Bundle\CurrencyBundle\Entity\Currency
+    default_adapter: doctrine_currency_adapter
