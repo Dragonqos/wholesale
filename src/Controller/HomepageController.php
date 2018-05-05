@@ -7,8 +7,10 @@ use App\Processor\PriceStrategy\InRangeStrategy;
 use App\Reader\AbstractReader;
 use App\Reader\HotlineReader;
 use App\Reader\RemainsReader;
+use App\Schema;
 use App\Writer\CsvWriter;
 
+use App\Writer\FileWriter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,18 +33,18 @@ class HomepageController extends Controller
     private $hotlineReader;
 
     /**
-     * @var CsvWriter
+     * @var FileWriter
      */
-    private $csvWriter;
+    private $fileWriter;
 
     /**
      * @var InRangeStrategy
      */
     private $inRangeStrategy;
-    /**
-     * @var FormFactoryInterface
-     */
-    private $formFactory;
+//    /**
+//     * @var FormFactoryInterface
+//     */
+//    private $formFactory;
 
     /**
      * HomepageController constructor.
@@ -50,44 +52,44 @@ class HomepageController extends Controller
      * @param RemainsReader   $remainsReader
      * @param HotlineReader   $hotlineReader
      * @param InRangeStrategy $inRangeStrategy
-     * @param CsvWriter       $csvWriter
+     * @param FileWriter      $fileWriter
      */
     public function __construct(
         RemainsReader $remainsReader,
         HotlineReader $hotlineReader,
         InRangeStrategy $inRangeStrategy,
-        CsvWriter $csvWriter,
-        FormFactoryInterface $formFactory
+        FileWriter $fileWriter
     ) {
         $this->remainsReader = $remainsReader;
         $this->hotlineReader = $hotlineReader;
 
         $this->inRangeStrategy = $inRangeStrategy;
-        $this->csvWriter = $csvWriter;
-        $this->formFactory = $formFactory;
+        $this->fileWriter = $fileWriter;
     }
-
-//    /**
-//     * @Symfony\Component\Routing\Annotation\Route(
-//     *     name="homepage",
-//     *     path="/"
-//     * )
-//     * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Method({"GET"})
-//     *
-//     * @return Response
-//     */
-//    public function indexAction()
-//    {
-//        $form = $this->formFactory->create(RegistrationFormType::class, $data);
-//
-//        $form = $this->get
-//    }
-
 
     /**
      * @Symfony\Component\Routing\Annotation\Route(
      *     name="homepage",
      *     path="/"
+     * )
+     * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Method({"GET"})
+     *
+     * @return Response
+     */
+    public function indexAction()
+    {
+//        $form = $this->formFactory->create(RegistrationFormType::class, $data);
+
+        echo 'yes';
+        die;
+
+    }
+
+
+    /**
+     * @Symfony\Component\Routing\Annotation\Route(
+     *     name="analyze",
+     *     path="/analyze"
      * )
      * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Method({"GET"})
      *
@@ -116,30 +118,30 @@ class HomepageController extends Controller
         $result = [];
 
         foreach($remainsArray as $row) {
-            $sku = $row[AbstractReader::SKU];
+            $sku = $row[Schema::SKU];
             $merged = array_key_exists($sku, $hotlineArray)
                 ? array_merge(
-                    [AbstractReader::SELLER_COST => 0, AbstractReader::RETAIL_PRICE => 0],
+                    [Schema::SELLER_COST => 0, Schema::RETAIL_PRICE => 0],
                     $row,
                     $hotlineArray[$sku]
                 )
                 : array_merge(
-                    [AbstractReader::SELLER_COST => 0, AbstractReader::RETAIL_PRICE => 0],
+                    [Schema::SELLER_COST => 0, Schema::RETAIL_PRICE => 0],
                     $row,
                     ['isNew' => 1]
                 );
 
             $wholesalePrice = $this->inRangeStrategy->process(
-                $merged[AbstractReader::SELLER_COST],
-                $merged[AbstractReader::RETAIL_PRICE]
+                $merged[Schema::SELLER_COST],
+                $merged[Schema::RETAIL_PRICE]
             );
 
-            $merged[AbstractReader::WHOLESALE_PRICE] = round($wholesalePrice);
+            $merged[Schema::WHOLESALE_PRICE] = round($wholesalePrice);
             $result[$sku] = $merged;
         }
 
         $path = __DIR__ . '/../../public/downloads/3result.xls';
-        $this->csvWriter->path($path)->write($result);
+        $this->fileWriter->path($path)->write($result);
 
         $response = new Response();
         $response->headers->set('Content-Type', 'application/vnd.ms-excel');

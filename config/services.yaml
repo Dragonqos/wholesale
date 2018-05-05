@@ -3,6 +3,42 @@
 parameters:
     locale: 'en'
 
+    app.reader.schema.remains:
+       - name: !php/const App\Schema::NAME
+         fieldIndex: 1
+         fieldType: string
+
+       - name: !php/const App\Schema::SKU
+         fieldIndex: 1
+         fieldType: string
+
+       - name: !php/const App\Schema::SELLER_COST
+         fieldIndex: 4
+         fieldType: float
+
+       - name: !php/const App\Schema::QUANTITY
+         fieldIndex: 2
+         fieldType: int
+
+    app.reader.schema.hotline:
+       - name: !php/const App\Schema::SKU
+         fieldIndex: 10
+         fieldType: int
+
+       - name: !php/const App\Schema::RETAIL_PRICE
+         fieldIndex: 5
+         fieldType: float
+
+    app.writer.schema.default:
+        A: !php/const App\Schema::SKU
+        B: !php/const App\Schema::NAME
+        C: !php/const App\Schema::WHOLESALE_PRICE
+        D: !php/const App\Schema::QUANTITY
+        E: !php/const App\Schema::SELLER_COST
+        F: !php/const App\Schema::RETAIL_PRICE
+
+
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -38,12 +74,17 @@ services:
     # App
 
     App\Service\SkuFinder: ~
+    App\Reader\RemainsReader:
+      calls:
+        - [ setSchema, ['%app.reader.schema.remains%'] ]
 
-    App\Reader\RemainsReader: ~
-    App\Reader\HotlineReader: ~
+    App\Reader\HotlineReader:
+      calls:
+        - [ setSchema, ['%app.reader.schema.hotline%'] ]
 
-    App\Writer\CsvWriter: ~
-
+    App\Writer\FileWriter:
+      arguments:
+        $schema: '%app.writer.schema.default%'
 
     App\Processor\PriceStrategy\PriceStrategyInterface: '@App\Processor\PriceStrategy\InRangeStrategy'
     App\Processor\PriceStrategy\InRangeStrategy: ~

@@ -17,4 +17,5 @@ return [
     Yectep\PhpSpreadsheetBundle\PhpSpreadsheetBundle::class => ['all' => true],
     Lexik\Bundle\CurrencyBundle\LexikCurrencyBundle::class => ['all' => true],
     Sylius\Bundle\FlowBundle\SyliusFlowBundle::class => ['all' => true],
+    Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle::class => ['all' => true],
 ];

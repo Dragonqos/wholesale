@@ -2,6 +2,7 @@
 
 namespace App\Reader;
 
+use App\Schema;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 /**
@@ -10,32 +11,6 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
  */
 class RemainsReader extends AbstractReader
 {
-    /**
-     * @return array
-     */
-    protected function getSchema(): array
-    {
-        return [
-            self::NAME => 1,
-            self::SKU => 1,
-            self::SELLER_COST => 4,
-            self::QUANTITY => 2
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getSchemaType(): array
-    {
-        return [
-            self::NAME => 'string',
-            self::SKU => 'string',
-            self::SELLER_COST => 'float',
-            self::QUANTITY => 'int'
-        ];
-    }
-
     /**
      * @param Worksheet $worksheet
      * @param int       $rowIndex
@@ -47,34 +22,34 @@ class RemainsReader extends AbstractReader
     {
         // reading first line
         $res = parent::readLine($worksheet, $rowIndex, $index);
-        $res[self::SKU] = 'sku--' . $rowIndex;
+        $res[Schema::SKU] = 'sku--' . $rowIndex;
 
-        if(array_key_exists(self::SELLER_COST, $res) && array_key_exists(self::QUANTITY, $res)) {
+        if(array_key_exists(Schema::SELLER_COST, $res) && array_key_exists(Schema::QUANTITY, $res)) {
             // every next line with the same key
 
-            $token = serialize([$res[self::SELLER_COST], $res[self::QUANTITY], $index]);
+            $token = serialize([$res[Schema::SELLER_COST], $res[Schema::QUANTITY], $index]);
             while(true) {
                 $rowIndex++;
                 $nextLine = parent::readLine($worksheet, $rowIndex, $index);
 
-                $cost = $nextLine[self::SELLER_COST] ?? null;
-                $qty = $nextLine[self::QUANTITY] ?? null;
+                $cost = $nextLine[Schema::SELLER_COST] ?? null;
+                $qty = $nextLine[Schema::QUANTITY] ?? null;
 
                 $newLineToken = serialize([$cost, $qty, $index]);
 
                 if($token !== $newLineToken) {
-                    $res[self::SKU] = 'sku--' . $rowIndex;
+                    $res[Schema::SKU] = 'sku--' . $rowIndex;
                     --$rowIndex;
                     return $res;
                 }
 
-                $sku = $nextLine[self::SKU] ?? null;
+                $sku = $nextLine[Schema::SKU] ?? null;
                 if(null !== $sku) {
                     $sku = preg_replace('/[\W]+/i', '', $sku);
                 }
 
                 if(is_numeric($sku)) {
-                    $res[self::SKU] = $sku;
+                    $res[Schema::SKU] = $sku;
                     return $res;
                 }
             }
@@ -82,5 +57,4 @@ class RemainsReader extends AbstractReader
 
         return $res;
     }
-
 }

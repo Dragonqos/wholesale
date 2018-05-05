@@ -2,6 +2,7 @@
 
 namespace App\Reader;
 
+use App\Schema;
 use App\Service\SkuFinder;
 use Lexik\Bundle\CurrencyBundle\Currency\Converter;
 use Yectep\PhpSpreadsheetBundle\Factory;
@@ -31,30 +32,6 @@ class HotlineReader extends AbstractReader
     }
 
     /**
-     * @return array
-     */
-    protected function getSchema(): array
-    {
-        return [
-//            self::NAME => 3,
-            self::SKU => 10,
-            self::RETAIL_PRICE => 5
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    protected function getSchemaType(): array
-    {
-        return [
-//            self::NAME => 'string',
-            self::SKU => 'int',
-            self::RETAIL_PRICE => 'float'
-        ];
-    }
-
-    /**
      * @param string $name
      * @param mixed  $val
      *
@@ -62,13 +39,13 @@ class HotlineReader extends AbstractReader
      */
     protected function convertValue(string $name, $val)
     {
-        if ($name === self::SKU) {
+        if ($name === Schema::SKU) {
             $val = $this->skuFinder->getFromUrl($val);
         }
 
         $val = parent::convertValue($name, $val);
 
-        if($name === self::RETAIL_PRICE) {
+        if($name === Schema::RETAIL_PRICE) {
             $val = $this->currencyConverter->convert($val, 'UAH', true, 'USD');
         }
 

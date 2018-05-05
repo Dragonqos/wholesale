@@ -2,6 +2,7 @@
 
 namespace App\Reader;
 
+use App\Schema;
 use App\Service\SkuFinder;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -15,13 +16,6 @@ use Yectep\PhpSpreadsheetBundle\Factory;
  */
 abstract class AbstractReader
 {
-    const SKU = 'sku';
-    const NAME = 'name';
-    const RETAIL_PRICE = 'retail_price';
-    const SELLER_COST = 'seller_cost';
-    const WHOLESALE_PRICE = 'wholesale_price';
-    const QUANTITY = 'quantity';
-
     private $floatRegex = '/[^0-9\.\-]/';
 
     /**
@@ -47,14 +41,41 @@ abstract class AbstractReader
     }
 
     /**
-     * @return array
+     * @var array
      */
-    abstract protected function getSchema(): array;
+    protected $schema = [];
+
+    /**
+     * @var array
+     */
+    protected $schemaType = [];
+
+    /**
+     * @param array $schema
+     */
+    public function setSchema(array $schema)
+    {
+        foreach($schema as $item) {
+            $this->schema[$item['name']] = $item['fieldIndex'];
+            $this->schemaType[$item['name']] = $item['fieldType'];
+        }
+    }
 
     /**
      * @return array
      */
-    abstract protected function getSchemaType(): array;
+    protected function getSchema(): array
+    {
+        return $this->schema;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getSchemaType(): array
+    {
+        return $this->schemaType;
+    }
 
     /**
      * @param string $filePath
@@ -84,9 +105,9 @@ abstract class AbstractReader
          */
         while ($rowIndex <= $totalRows) {
             $res = $this->readLine($worksheet, $rowIndex, $describedRows);
-            if (!empty($res) && isset($res[self::SKU])) {
+            if (!empty($res) && isset($res[Schema::SKU])) {
 
-                $sku = $res[self::SKU];
+                $sku = $res[Schema::SKU];
 
                 if(array_key_exists($sku, $result)) {
                     $sku .= '-' . $rowIndex;
