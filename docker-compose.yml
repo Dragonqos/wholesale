@@ -1,0 +1,27 @@
+version: '3.4'
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./:/var/www/wholesale
+      - ./docker/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8002:80
+
+  php:
+    build: ./docker/php
+    volumes:
+      - ./:/var/www/wholesale
+    working_dir: /var/www/wholesale
+
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    expose:
+      - "3306"
+    ports:
+      - 3307:3306
+
+  redis:
+    image: redis
