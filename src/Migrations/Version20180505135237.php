@@ -8,14 +8,14 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180502230006 extends AbstractMigration
+final class Version20180505135237 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE lexik_currency (id INT AUTO_INCREMENT NOT NULL, code VARCHAR(3) NOT NULL, rate NUMERIC(10, 4) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE jobs ADD wholesale_price VARCHAR(255) DEFAULT NULL, CHANGE rate rate NUMERIC(10, 4) DEFAULT NULL, CHANGE created_at created_at DATETIME DEFAULT NULL, CHANGE updated_at updated_at DATETIME DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -23,14 +23,6 @@ final class Version20180502230006 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP TABLE lexik_currency');
-    }
-
-    public function postUp(Schema $schema)
-    {
-        $sqlPrefix = 'INSERT INTO lexik_currency (code, rate) values ';
-
-        $this->connection->executeQuery($sqlPrefix . "('USD', '26.01') ");
-        $this->connection->executeQuery($sqlPrefix . "('UAH', '1') ");
+        $this->addSql('ALTER TABLE jobs DROP wholesale_price, CHANGE rate rate NUMERIC(10, 4) DEFAULT \'NULL\', CHANGE created_at created_at DATETIME DEFAULT \'NULL\', CHANGE updated_at updated_at DATETIME DEFAULT \'NULL\'');
     }
 }

@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Make your wholesale{% endblock %}
+
 {% block body %}
-    <div class="navbar-wrapper">
-        <div class="container">
-            content here
-        </div>
+    <div class="jumbotron" style="margin-top: 20px">
+        <h1 class="display-4">Hey, man!</h1>
+
+        <p class="lead">Are you ready for great sales today?</p>
+        <p>Prepare your warehouse and hotline prices in CSV format, enter currency rate below receive your wholesale price </p>
+
+        <hr class="my-4">
+
+        {{ include('_form.html.twig') }}
+
     </div>
+
 {% endblock %}

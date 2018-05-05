@@ -2,19 +2,16 @@
 
 namespace App\Controller;
 
-use App\Processor\PriceStrategy\InRangeStrategy;
-
-use App\Reader\AbstractReader;
-use App\Reader\HotlineReader;
-use App\Reader\RemainsReader;
-use App\Schema;
-use App\Writer\CsvWriter;
-
-use App\Writer\FileWriter;
+use App\Entity\Job;
+use App\Form\Type\JobType;
+use App\Processor\Processor;
+use App\Repository\JobRepository;
+use App\Service\FileUploader;
+use Lexik\Bundle\CurrencyBundle\Entity\Currency;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class HomepageController
@@ -23,130 +20,105 @@ use Symfony\Component\Routing\Route;
 class HomepageController extends Controller
 {
     /**
-     * @var RemainsReader
+     * @var Processor
      */
-    private $remainsReader;
-
-    /**
-     * @var HotlineReader
-     */
-    private $hotlineReader;
-
-    /**
-     * @var FileWriter
-     */
-    private $fileWriter;
-
-    /**
-     * @var InRangeStrategy
-     */
-    private $inRangeStrategy;
-//    /**
-//     * @var FormFactoryInterface
-//     */
-//    private $formFactory;
+    private $processor;
 
     /**
      * HomepageController constructor.
      *
-     * @param RemainsReader   $remainsReader
-     * @param HotlineReader   $hotlineReader
-     * @param InRangeStrategy $inRangeStrategy
-     * @param FileWriter      $fileWriter
+     * @param Processor $processor
      */
-    public function __construct(
-        RemainsReader $remainsReader,
-        HotlineReader $hotlineReader,
-        InRangeStrategy $inRangeStrategy,
-        FileWriter $fileWriter
-    ) {
-        $this->remainsReader = $remainsReader;
-        $this->hotlineReader = $hotlineReader;
-
-        $this->inRangeStrategy = $inRangeStrategy;
-        $this->fileWriter = $fileWriter;
+    public function __construct(Processor $processor)
+    {
+        $this->processor = $processor;
     }
 
     /**
-     * @Symfony\Component\Routing\Annotation\Route(
-     *     name="homepage",
-     *     path="/"
-     * )
-     * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Method({"GET"})
+     * @Route("/", name="homepage", methods="GET|POST")
+     * @param Request      $request
+     * @param FileUploader $fileUploader
      *
      * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request, FileUploader $fileUploader): Response
     {
-//        $form = $this->formFactory->create(RegistrationFormType::class, $data);
+        $job = new Job();
+        $this->setLastCurrency($job);
 
-        echo 'yes';
-        die;
+        $form = $this->createForm(JobType::class, $job);
+        $form->handleRequest($request);
 
-    }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $warehousePrice = $job->getWarehousePrice();
 
+            if ($warehousePrice) {
+                $fileName = $fileUploader->upload($warehousePrice);
+                $job->setWarehousePrice($fileName);
+            }
 
-    /**
-     * @Symfony\Component\Routing\Annotation\Route(
-     *     name="analyze",
-     *     path="/analyze"
-     * )
-     * @Sensio\Bundle\FrameworkExtraBundle\Configuration\Method({"GET"})
-     *
-     * @return Response
-     */
-    public function analyzeAction()
-    {
-        // choose Remains document
-        // choose column names for remains document
-        $path = __DIR__ . '/../../public/downloads/1remains.csv';
-        $remainsArray = $this->remainsReader->readFromFile($path);
+            $hotlinePrice = $job->getHotlinePrice();
 
-//        echo '<pre>';
-//        $list = array_column($remainsArray, 'sku');
-//        sort($list);
-//
-//        print_R($list);
-//        die;
+            if ($hotlinePrice) {
+                $fileName = $fileUploader->upload($hotlinePrice);
+                $job->setHotlinePrice($fileName);
+            }
 
-        // choose Hotline document
-        // choose column names for hotline document
-        // choose conversion rate
-        $path = __DIR__ . '/../../public/downloads/2hotline.csv';
-        $hotlineArray = $this->hotlineReader->readFromFile($path);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($job);
+            $em->flush();
 
-        $result = [];
+            $this->executeJob($job);
 
-        foreach($remainsArray as $row) {
-            $sku = $row[Schema::SKU];
-            $merged = array_key_exists($sku, $hotlineArray)
-                ? array_merge(
-                    [Schema::SELLER_COST => 0, Schema::RETAIL_PRICE => 0],
-                    $row,
-                    $hotlineArray[$sku]
-                )
-                : array_merge(
-                    [Schema::SELLER_COST => 0, Schema::RETAIL_PRICE => 0],
-                    $row,
-                    ['isNew' => 1]
-                );
-
-            $wholesalePrice = $this->inRangeStrategy->process(
-                $merged[Schema::SELLER_COST],
-                $merged[Schema::RETAIL_PRICE]
-            );
-
-            $merged[Schema::WHOLESALE_PRICE] = round($wholesalePrice);
-            $result[$sku] = $merged;
+            $filePath = $this->getParameter('app.download.dir') . '/'. $job->getWholesalePrice();
+            return $this->file($filePath);
         }
 
-        $path = __DIR__ . '/../../public/downloads/3result.xls';
-        $this->fileWriter->path($path)->write($result);
+        return $this->render('homepage.html.twig', [
+            'job' => $job,
+            'form' => $form->createView(),
+        ]);
+    }
 
-        $response = new Response();
-        $response->headers->set('Content-Type', 'application/vnd.ms-excel');
-        $response->headers->set('Content-Disposition', 'attachment; filename="3result.xls"');
-        $response->setContent(file_get_contents($path));
-        return $response;
+    /**
+     * @param Job $job
+     */
+    private function executeJob(Job $job): void
+    {
+        $this->setLastCurrency($job);
+        $this->processor->process($job);
+
+        if($job->hasWholesalePrice()) {
+            // clean old results with files
+            $em = $this->getDoctrine()->getManager();
+
+            /** @var JobRepository $repo */
+            $repo = $em->getRepository(Job::class);
+            $repo->removeOldRecords();
+            $em->flush();
+        }
+    }
+
+    /**
+     * @param Job $job
+     */
+    private function setLastCurrency(Job $job): void
+    {
+        $repo = $this->getDoctrine()->getRepository(Currency::class);
+        $currency = $repo->findOneBy([
+            'code' => 'USD',
+        ]);
+
+        if($currency instanceof Currency) {
+            $jobRate = $job->getRate();
+            if(null !== $jobRate) {
+                $currency->setRate($jobRate);
+            }
+
+            $currencyRate = $currency->getRate();
+            if(null !== $currencyRate) {
+                $job->setRate($currencyRate);
+            }
+        }
     }
 }

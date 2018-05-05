@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Wholesale!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Make your Wholesale{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('/assets/bootstrap-4/css/bootstrap.min.css') }}?#TIMESTAMP#">
+</head>
+<body>
+<div class="container">
+
+    {% block body %}{% endblock %}
+
+</div>
+
+{% block javascripts %}{% endblock %}
+</body>
 </html>

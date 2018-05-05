@@ -1,0 +1,21 @@
+{% block form_row %}
+    {% spaceless %}
+        <div class="form-group row{% if (not compound or force_error|default(false)) and not valid %} is-invalid{% endif %}">
+            {{- form_label(form) -}}
+            <div class="{{ block('form_group_class') }}">
+                {{- form_widget(form) -}}
+                {% if help %}
+                    <small class="form-text text-muted">
+                        {{ help }}
+                    </small>
+                {% endif %}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block _job_rate_widget %}
+    <div class="col-sm-2" style="padding-left: 0;">
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}

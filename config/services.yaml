@@ -3,6 +3,9 @@
 parameters:
     locale: 'en'
 
+    app.upload.dir: '%kernel.project_dir%/public/upload'
+    app.download.dir: '%kernel.project_dir%/public/download'
+
     app.reader.schema.remains:
        - name: !php/const App\Schema::NAME
          fieldIndex: 1
@@ -70,21 +73,50 @@ services:
     Lexik\Bundle\CurrencyBundle\Currency\Converter: '@lexik_currency.converter'
     Lexik\Bundle\CurrencyBundle\Command\ImportCurrencyCommand: ~
 
+    # Gedmo doctrine extensions
+    gedmo.listener.timestampable:
+        class: Gedmo\Timestampable\TimestampableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ '@annotation_reader' ] ]
 
-    # App
+
+
+    # Application
 
     App\Service\SkuFinder: ~
+    App\Service\FileUploader:
+        arguments: ['%app.upload.dir%']
+
+    App\Processor\Processor:
+        arguments:
+            $uploadPath: '%app.upload.dir%'
+            $downloadPath: '%app.download.dir%'
+
     App\Reader\RemainsReader:
-      calls:
-        - [ setSchema, ['%app.reader.schema.remains%'] ]
+        calls:
+          - [ setSchema, ['%app.reader.schema.remains%'] ]
 
     App\Reader\HotlineReader:
-      calls:
-        - [ setSchema, ['%app.reader.schema.hotline%'] ]
+        calls:
+          - [ setSchema, ['%app.reader.schema.hotline%'] ]
 
     App\Writer\FileWriter:
-      arguments:
-        $schema: '%app.writer.schema.default%'
+        arguments:
+          $schema: '%app.writer.schema.default%'
 
     App\Processor\PriceStrategy\PriceStrategyInterface: '@App\Processor\PriceStrategy\InRangeStrategy'
     App\Processor\PriceStrategy\InRangeStrategy: ~
+
+
+    App\Form\Extension\HelpMessageTypeExtension:
+        tags:
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FormType }
+
+    App\EventListener\Doctrine\JobRemoveSubscriber:
+        arguments:
+            $uploadPath: '%app.upload.dir%'
+            $downloadPath: '%app.download.dir%'
+        tags:
+            - { name: doctrine.event_subscriber }
