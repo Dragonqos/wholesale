@@ -102,6 +102,7 @@ class InRangeStrategy implements PriceStrategyInterface
             # now we can calculate new Wholesale Price
 
             $margin = $this->getPercentOfNumber($retailPrice, $settings['discount']);
+            $minSellerMargin = $this->getPercentOfNumber($sellerCost, $settings['minDiscount']);
             $minMargin = $this->getPercentOfNumber($retailPrice, $settings['minDiscount']);
             $maxMargin = $settings['maxAmount'];
 
@@ -111,9 +112,15 @@ class InRangeStrategy implements PriceStrategyInterface
 
             if($margin > $priceDiff) {
 
-                $result = $minMargin >= $priceDiff
+                $result1 = $minMargin >= $priceDiff
                     ? $retailPrice // if less then min margin
                     : $sellerCost + $minMargin;
+
+                $result2 = $minSellerMargin >= $priceDiff
+                    ? $retailPrice
+                    : $sellerCost + $minSellerMargin;
+
+                $result = max($result1, $result2);
 
                 if ($result === $retailPrice) {
                     return $result;
@@ -121,7 +128,7 @@ class InRangeStrategy implements PriceStrategyInterface
 
             } else {
                 if($margin > $priceDiff/2) {
-                    $result = $retailPrice - ($priceDiff/2);
+                    $result = $sellerCost + ($margin >= $minSellerMargin ? $margin : $minSellerMargin);
                 }
 
                 if($margin < $priceDiff/2) {
@@ -129,9 +136,15 @@ class InRangeStrategy implements PriceStrategyInterface
                 }
             }
 
-            if($retailPrice - $result < $minMargin) {
-                $result = $retailPrice - $minMargin;
-            }
+            $result1 = $result - $sellerCost < $minSellerMargin
+                ? $sellerCost + $minSellerMargin
+                : $result;
+
+            $result2 = $retailPrice - $result < $minMargin
+                ? $retailPrice - $minMargin
+                : $result;
+
+            $result = max($result1, $result2);
 
             # when more than max amount
             if($retailPrice - $result > $maxMargin) {
