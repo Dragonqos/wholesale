@@ -25,7 +25,7 @@ parameters:
 
     app.reader.schema.hotline:
        - name: !php/const App\Schema::SKU
-         fieldIndex: 10
+         fieldIndex: 9
          fieldType: int
 
        - name: !php/const App\Schema::RETAIL_PRICE
