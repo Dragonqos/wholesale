@@ -2,7 +2,7 @@
 
 namespace DoctrineMigrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
+use Doctrine\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
@@ -26,7 +26,7 @@ final class Version20180502230006 extends AbstractMigration
         $this->addSql('DROP TABLE lexik_currency');
     }
 
-    public function postUp(Schema $schema)
+    public function postUp(Schema $schema): void
     {
         $sqlPrefix = 'INSERT INTO lexik_currency (code, rate) values ';
 
