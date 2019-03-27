@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea7b3c117fda41459bfb809cb41e80b1",
+    "content-hash": "05bdbcb66ced09eee3cf744d344cbff3",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3649,12 +3649,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/framework-bundle.git",
-                "reference": "6479cf1c79db4619896defe944e032f94be66a03"
+                "reference": "d975444737b1e3429ba1f6552ea00ee019cf83b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/6479cf1c79db4619896defe944e032f94be66a03",
-                "reference": "6479cf1c79db4619896defe944e032f94be66a03",
+                "url": "https://api.github.com/repos/symfony/framework-bundle/zipball/d975444737b1e3429ba1f6552ea00ee019cf83b0",
+                "reference": "d975444737b1e3429ba1f6552ea00ee019cf83b0",
                 "shasum": ""
             },
             "require": {
@@ -3763,7 +3763,7 @@
             ],
             "description": "Symfony FrameworkBundle",
             "homepage": "https://symfony.com",
-            "time": "2019-03-27T06:44:58+00:00"
+            "time": "2019-03-27T11:26:38+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -5488,6 +5488,79 @@
             "time": "2019-01-30T06:38:59+00:00"
         },
         {
+            "name": "symfony/translation",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/translation.git",
+                "reference": "84545ed04867d25891dfe732754cd58e0dc14d92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/84545ed04867d25891dfe732754cd58e0dc14d92",
+                "reference": "84545ed04867d25891dfe732754cd58e0dc14d92",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/contracts": "^1.0.2",
+                "symfony/polyfill-mbstring": "~1.0"
+            },
+            "conflict": {
+                "symfony/config": "<3.4",
+                "symfony/dependency-injection": "<3.4",
+                "symfony/yaml": "<3.4"
+            },
+            "provide": {
+                "symfony/translation-contracts-implementation": "1.0"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~3.4|~4.0",
+                "symfony/console": "~3.4|~4.0",
+                "symfony/dependency-injection": "~3.4|~4.0",
+                "symfony/finder": "~2.8|~3.0|~4.0",
+                "symfony/intl": "~3.4|~4.0",
+                "symfony/yaml": "~3.4|~4.0"
+            },
+            "suggest": {
+                "psr/log-implementation": "To use logging capability in translator",
+                "symfony/config": "",
+                "symfony/yaml": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Translation\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Translation Component",
+            "homepage": "https://symfony.com",
+            "time": "2019-03-07T08:54:57+00:00"
+        },
+        {
             "name": "symfony/twig-bridge",
             "version": "dev-master",
             "source": {
@@ -5664,12 +5737,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "f463ca7154cfd9766b7c82d9de935dc4b72e29b4"
+                "reference": "f12904d26c0c9e59299c1172499524aef538068b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/f463ca7154cfd9766b7c82d9de935dc4b72e29b4",
-                "reference": "f463ca7154cfd9766b7c82d9de935dc4b72e29b4",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/f12904d26c0c9e59299c1172499524aef538068b",
+                "reference": "f12904d26c0c9e59299c1172499524aef538068b",
                 "shasum": ""
             },
             "require": {
@@ -5745,7 +5818,7 @@
             ],
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
-            "time": "2019-03-26T10:04:14+00:00"
+            "time": "2019-03-27T12:32:56+00:00"
         },
         {
             "name": "symfony/var-exporter",
