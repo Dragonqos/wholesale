@@ -8,7 +8,7 @@
 /public/download
 /public/upload
 ###< symfony/framework-bundle ###
-
+/www
 ###> symfony/webpack-encore-pack ###
 /node_modules/
 /public/build/
