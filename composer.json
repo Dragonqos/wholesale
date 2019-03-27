@@ -26,6 +26,7 @@
         "symfony/web-link": "^4.0",
         "symfony/webpack-encore-pack": "*",
         "symfony/yaml": "^4.0",
+        "symfony/translation": "^4.0",
         "stof/doctrine-extensions-bundle": "^1.2",
         "yectep/phpspreadsheet-bundle": "*",
         "lexik/currency-bundle": "dev-master",

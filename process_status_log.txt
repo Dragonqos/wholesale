@@ -1,0 +1,254 @@
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1487 Ss   13:19 root      1487 12.0   328
+bash /usr/local/bin/test-ch ?         1492 S    13:19 root      1492  1.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1493 R    13:19 root      1493  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1502 Ss   13:19 root      1502  0.0   328
+bash /usr/local/bin/test-ch ?         1507 S    13:19 root      1507  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1508 R    13:19 root      1508  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1517 Ss   13:20 root      1517  0.0   328
+bash /usr/local/bin/test-ch ?         1523 S    13:20 root      1523  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1524 R    13:20 root      1524  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1533 Ss   13:20 root      1533  0.0   328
+bash /usr/local/bin/test-ch ?         1539 S    13:20 root      1539  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1540 R    13:20 root      1540  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1549 Ss   13:21 root      1549  0.0   328
+bash /usr/local/bin/test-ch ?         1555 S    13:21 root      1555  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1556 R    13:21 root      1556  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1565 Ss   13:21 root      1565  0.0   328
+bash /usr/local/bin/test-ch ?         1571 S    13:21 root      1571  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1572 R    13:21 root      1572  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1581 Ss   13:22 root      1581  0.0   328
+bash /usr/local/bin/test-ch ?         1587 S    13:22 root      1587  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1588 R    13:22 root      1588  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1597 Ss   13:22 root      1597  0.0   328
+bash /usr/local/bin/test-ch ?         1603 S    13:22 root      1603  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1604 R    13:22 root      1604  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1613 Ss   13:23 root      1613  2.0   328
+bash /usr/local/bin/test-ch ?         1619 S    13:23 root      1619  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1620 R    13:23 root      1620  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1629 Ss   13:23 root      1629  0.0   328
+bash /usr/local/bin/test-ch ?         1635 S    13:23 root      1635  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1636 R    13:23 root      1636  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1645 Ss   13:24 root      1645  0.0   328
+bash /usr/local/bin/test-ch ?         1650 S    13:24 root      1650  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1651 R    13:24 root      1651  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1660 Ss   13:24 root      1660  0.0   328
+bash /usr/local/bin/test-ch ?         1665 S    13:24 root      1665  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1666 R    13:24 root      1666  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1675 Ss   13:25 root      1675  0.0   328
+bash /usr/local/bin/test-ch ?         1681 S    13:25 root      1681  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1682 R    13:25 root      1682  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1691 Ss   13:25 root      1691  0.0   328
+bash /usr/local/bin/test-ch ?         1696 S    13:25 root      1696  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1697 R    13:25 root      1697  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1706 Ss   13:26 root      1706  0.0   328
+bash /usr/local/bin/test-ch ?         1712 S    13:26 root      1712  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1713 R    13:26 root      1713  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1722 Ss   13:26 root      1722  0.0   328
+bash /usr/local/bin/test-ch ?         1728 S    13:26 root      1728  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1729 R    13:26 root      1729  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1738 Ss   13:27 root      1738  0.0   328
+bash /usr/local/bin/test-ch ?         1744 S    13:27 root      1744  0.0   352
+ps -eo cmd,tty,pid,stat,sta ?         1745 R    13:27 root      1745  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+grep php-fpm.*master        ?         1747 R    13:27 root      1747  0.0   264
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1754 Ss   13:27 root      1754  0.0   328
+bash /usr/local/bin/test-ch ?         1760 S    13:27 root      1760  0.0   352
+ps -eo cmd,tty,pid,stat,sta ?         1761 R    13:27 root      1761  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1770 Ss   13:28 root      1770  0.0   328
+bash /usr/local/bin/test-ch ?         1776 S    13:28 root      1776  0.0   352
+ps -eo cmd,tty,pid,stat,sta ?         1777 R    13:28 root      1777  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1786 Ss   13:28 root      1786  0.0   328
+bash /usr/local/bin/test-ch ?         1792 S    13:28 root      1792  0.0   352
+ps -eo cmd,tty,pid,stat,sta ?         1793 R    13:28 root      1793  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1802 Ss   13:29 root      1802  0.0   328
+bash /usr/local/bin/test-ch ?         1808 S    13:29 root      1808  0.0   352
+ps -eo cmd,tty,pid,stat,sta ?         1809 R    13:29 root      1809  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1818 Ss   13:29 root      1818  0.0   328
+bash /usr/local/bin/test-ch ?         1824 S    13:29 root      1824  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1825 R    13:29 root      1825  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
+################################################################################################################
+CMD                         TT         PID STAT START USER       PID %CPU  SIZE
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+php-fpm: pool www           ?            6 S    12:43 www-data     6  0.0  6964
+php-fpm: pool www           ?            7 S    12:43 www-data     7  0.0  6964
+/bin/sh -c /usr/local/bin/t ?         1834 Ss   13:30 root      1834  2.0   328
+bash /usr/local/bin/test-ch ?         1840 S    13:30 root      1840  0.0   356
+ps -eo cmd,tty,pid,stat,sta ?         1841 R    13:30 root      1841  0.0   956
+php-fpm: master process (/u ?            1 Ss   12:43 root         1  0.1  6964
+################################### PHP-FPM MASTER PROCESS STATUS###############################################
+Process status is - Ss
