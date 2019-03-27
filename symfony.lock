@@ -47,6 +47,9 @@
             "ref": "c1431086fec31f17fbcfe6d6d7e92059458facc1"
         }
     },
+    "doctrine/event-manager": {
+        "version": "1.0.x-dev"
+    },
     "doctrine/inflector": {
         "version": "v1.3.0"
     },
@@ -61,6 +64,12 @@
     },
     "doctrine/orm": {
         "version": "v2.6.1"
+    },
+    "doctrine/persistence": {
+        "version": "1.1.x-dev"
+    },
+    "doctrine/reflection": {
+        "version": "1.0.x-dev"
     },
     "easycorp/easy-log-handler": {
         "version": "1.0",
@@ -89,6 +98,12 @@
     "lexik/currency-bundle": {
         "version": "dev-master"
     },
+    "markbaker/complex": {
+        "version": "1.4.7"
+    },
+    "markbaker/matrix": {
+        "version": "1.1.4"
+    },
     "mockery/mockery": {
         "version": "0.9.x-dev"
     },
@@ -97,6 +112,9 @@
     },
     "nikic/php-parser": {
         "version": "v4.0.1"
+    },
+    "ocramius/package-versions": {
+        "version": "1.4.0"
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
@@ -172,6 +190,9 @@
             "version": "3.3",
             "ref": "e3868d2f4a5104f19f844fe551099a00c6562527"
         }
+    },
+    "symfony/contracts": {
+        "version": "1.1-dev"
     },
     "symfony/css-selector": {
         "version": "v4.0.9"
@@ -260,6 +281,9 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/mime": {
+        "version": "4.3-dev"
+    },
     "symfony/monolog-bridge": {
         "version": "v4.0.9"
     },
@@ -293,11 +317,17 @@
     "symfony/polyfill-intl-icu": {
         "version": "v1.8.0"
     },
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.11.0"
+    },
     "symfony/polyfill-mbstring": {
         "version": "v1.8.0"
     },
     "symfony/polyfill-php72": {
         "version": "v1.8.0"
+    },
+    "symfony/polyfill-php73": {
+        "version": "1.11-dev"
     },
     "symfony/process": {
         "version": "v4.0.9"
@@ -331,6 +361,18 @@
             "version": "3.3",
             "ref": "f8a63faa0d9521526499c0a8f403c9964ecb0527"
         }
+    },
+    "symfony/security-core": {
+        "version": "4.3-dev"
+    },
+    "symfony/security-csrf": {
+        "version": "4.3-dev"
+    },
+    "symfony/security-guard": {
+        "version": "4.3-dev"
+    },
+    "symfony/security-http": {
+        "version": "4.3-dev"
     },
     "symfony/serializer": {
         "version": "v4.0.9"
@@ -376,6 +418,9 @@
     },
     "symfony/var-dumper": {
         "version": "v4.0.9"
+    },
+    "symfony/var-exporter": {
+        "version": "4.3-dev"
     },
     "symfony/web-link": {
         "version": "v4.0.9"

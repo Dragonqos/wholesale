@@ -15,7 +15,6 @@
         "symfony/flex": "^1.0",
         "symfony/form": "^4.0",
         "symfony/framework-bundle": "^4.0",
-        "symfony/lts": "^4@dev",
         "symfony/monolog-bundle": "^3.1",
         "symfony/orm-pack": "*",
         "symfony/process": "^4.0",
@@ -30,13 +29,13 @@
         "stof/doctrine-extensions-bundle": "^1.2",
         "yectep/phpspreadsheet-bundle": "*",
         "lexik/currency-bundle": "dev-master",
-        "sylius/flow-bundle": "dev-master"
+        "sylius/flow-bundle": "dev-master",
+        "symfony/dotenv": "^4.0"
     },
     "require-dev": {
         "symfony/browser-kit": "^4.0",
         "symfony/css-selector": "^4.0",
         "symfony/debug-pack": "*",
-        "symfony/dotenv": "^4.0",
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^4.0",
         "symfony/profiler-pack": "*",
