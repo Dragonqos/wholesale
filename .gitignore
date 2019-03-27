@@ -19,6 +19,7 @@ yarn-error.log
 ###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml
+/process_status_log.txt
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/web-server-bundle ###
