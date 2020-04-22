@@ -28,7 +28,7 @@ class Job implements ResourceInterface, TimestampedInterface
      * @var string
      * @ORM\Column(name="warehouse_price", type="string", length=255, unique=false)
      * @Assert\NotBlank()
-     * @Assert\File( maxSize = "2028k", mimeTypes = {"text/csv", "text/plain"}, mimeTypesMessage = "Please upload a valid CSV File")
+     * @Assert\File( maxSize = "10028k", mimeTypes = {"text/csv", "text/plain"}, mimeTypesMessage = "Please upload a valid CSV File")
      */
     protected $warehousePrice;
 
@@ -36,7 +36,7 @@ class Job implements ResourceInterface, TimestampedInterface
      * @var string
      * @ORM\Column(name="hotline_price", type="string", length=255, unique=false)
      * @Assert\NotBlank()
-     * @Assert\File( maxSize = "2028k", mimeTypes = {"text/csv", "text/plain"}, mimeTypesMessage = "Please upload a valid CSV File")
+     * @Assert\File( maxSize = "10028k", mimeTypes = {"text/csv", "text/plain"}, mimeTypesMessage = "Please upload a valid CSV File")
      */
     protected $hotlinePrice;
 
